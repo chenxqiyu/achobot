@@ -1,7 +1,7 @@
 mutils
 opencv-python
 numpy
-request
+requests
 keyboard
 pypiwin32
 pygame
