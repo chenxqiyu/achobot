@@ -51,14 +51,14 @@ print("[INFO] starting video stream...")
 # fps = FPS().start()
 
 # loop over the frames from the video stream
-HSX = 100;
-LSX = 1000;
-HSY = 100;
-LSY = 1000;
-HEX = 100;
-LEX = 1000;
-HEY = 100;
-LEY = 1000;
+HSX = 100
+LSX = 1000
+HSY = 100
+LSY = 1000
+HEX = 100
+LEX = 1000
+HEY = 100
+LEY = 1000
 
 while True:
     # grab the frame from the threaded video stream and resize it
@@ -105,15 +105,15 @@ while True:
                 pygame.init()
                 pygame.event.get()
                 if pygame.mouse.get_pressed():
-                    print
-                    'pressing'
+                    print('pressing')
                     # tried to detect my character's offset and add the best way to exclude it, failed most tests.
                     if startX > 369 & startX < 1402 & startY > -1 & startY < 725 & endX > 339 & endX < 1805 & endY > 806 & endY < 1017:
-                        print
-                        'found myself'
+                        print('found myself')
                     else:
-                        # print 'found somebody else'
-                        nosum = int(round(startX * 1)) + int(round(startX * 0.06))
+                        print
+                        ('found somebody else')
+                        nosum = int(round(startX * 1)) + \
+                            int(round(startX * 0.06))
                         nosum2 = int(round(y * 1)) + int(round(y * 0.7))
                         halfX = (endX - startX) / 2
                         halfY = (endY - startY) / 2
@@ -161,21 +161,21 @@ while True:
                         LEY = endY
 
                     print
-                    'HStartX: ' + str(HSX)
+                    ('HStartX: ' + str(HSX))
                     print
-                    'LStartX: ' + str(LSX)
+                    ('LStartX: ' + str(LSX))
                     print
-                    'HStartY: ' + str(HSY)
+                    ('HStartY: ' + str(HSY))
                     print
-                    'LStartY: ' + str(LSY)
+                    ('LStartY: ' + str(LSY))
                     print
-                    'HendX: ' + str(HEX)
+                    ('HendX: ' + str(HEX))
                     print
-                    'LendX: ' + str(LEX)
+                    ('LendX: ' + str(LEX))
                     print
-                    'HendY: ' + str(HEY)
+                    ('HendY: ' + str(HEY))
                     print
-                    'LendY: ' + str(LEY)
+                    ('LendY: ' + str(LEY))
 
                 # print args["confidence"]
 
