@@ -13,6 +13,7 @@ It uses OpenCV 3.3 dnn module + petrained MobileNetSSD caffemodel to detect enti
 
 ```bash
 pip3 install -r requirements.txt
+python -m pip install -r requirements.txt -i  https://mirrors.aliyun.com/pypi/simple/
 ```
 
 ## Usage
