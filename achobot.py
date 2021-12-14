@@ -63,37 +63,45 @@ LEY = 1000
 while True:
     # grab the frame from the threaded video stream and resize it
     # to have a maximum width of 400 pixels
+    # 从线程视频流中抓取帧并调整其大小，使其最大宽度为400像素
 
     frame = np.array(ImageGrab.grab(bbox=(0, 40, 1820, 1240)))
     # frame = imutils.resize(frame, width=400)
 
     # grab the frame dimensions and convert it to a blob
+    # 抓取框架尺寸并将其转换为blob
     (h, w) = frame.shape[:2]
     blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)),
                                  0.007843, (300, 300), 127.5)
 
     # pass the blob through the network and obtain the detections and
     # predictions
+    # 通过网络传递blob并获得检测和预测
     net.setInput(blob)
     detections = net.forward()
 
     # loop over the detections
+    # 循环检测
     for i in np.arange(0, detections.shape[2]):
         # extract the confidence (i.e., probability) associated with
         # the prediction
+        # 提取与预测相关的置信度（即概率）
         confidence = detections[0, 0, i, 2]
 
         # filter out weak detections by ensuring the `confidence` is
         # greater than the minimum confidence
+        # 通过确保“置信度”大于最小置信度来过滤弱检测
         if confidence > args["confidence"]:
             # extract the index of the class label from the
             # `detections`, then compute the (x, y)-coordinates of
             # the bounding box for the object
+            # 从“detections”中提取类标签的索引，然后计算对象边界框的（x，y）-坐标
             idx = int(detections[0, 0, i, 1])
             box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
             (startX, startY, endX, endY) = box.astype("int")
 
             # draw the prediction on the frame
+            # 在框架上绘制预测
             label = "{}: {:.2f}%".format(CLASSES[idx],
                                          confidence * 100)
             cv2.rectangle(frame, (startX, startY), (endX, endY),
@@ -107,11 +115,12 @@ while True:
                 if pygame.mouse.get_pressed():
                     print('pressing')
                     # tried to detect my character's offset and add the best way to exclude it, failed most tests.
+                    # 试图检测角色的偏移量并添加排除它的最佳方法，但大多数测试失败
                     if startX > 369 & startX < 1402 & startY > -1 & startY < 725 & endX > 339 & endX < 1805 & endY > 806 & endY < 1017:
-                        print('found myself')
+                        print('找到自己')
                     else:
                         print
-                        ('found somebody else')
+                        ('找到别人')
                         nosum = int(round(startX * 1)) + \
                             int(round(startX * 0.06))
                         nosum2 = int(round(y * 1)) + int(round(y * 0.7))
@@ -119,6 +128,7 @@ while True:
                         halfY = (endY - startY) / 2
                         finalX = startX + halfX
                         finalY = startY + halfY
+                        # 具体操作
                         #pyautogui.moveTo(finalX, finalY)
                         # win32api.SetCursorPos((finalX, finalY))
                         #win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, int(finalX), int(finalY), 0, 0)
@@ -182,6 +192,7 @@ while True:
     #             click(10,10)
 
     # show the output frame
+    # 显示输出帧
     cv2.imshow("Frame", frame)
     key = cv2.waitKey(1) & 0xFF
 
